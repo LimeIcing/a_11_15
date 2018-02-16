@@ -1,4 +1,5 @@
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Main15 {
@@ -10,15 +11,38 @@ public class Main15 {
      */
 
     public static void main(String[] args) {
-
+        LinkedList<Integer> a = new LinkedList<>();
+        a.add(8);
+        a.add(5);
+        a.add(2);
+        a.add(5);
+        a.add(7);
+        a.add(3);
+        a.add(5);
+        a.add(2);
+        System.out.println(maxOccurrences(a));
     }
 
-    public static int maxOccurences(List<Integer> list) {
+    public static int maxOccurrences(List<Integer> list) {
         if (list.isEmpty()) {
             return 0;
         }
 
-        HashMap aux = new HashMap();
-        return -1;
+        HashSet<Integer> aux = new HashSet<>(list);
+        int mode = 0;
+
+        for (int n:aux) {
+            int counter = 0;
+            for (int i = 0; i < list.size(); i++) {
+                if (n == list.get(i)) {
+                    counter++;
+                }
+            }
+            if (counter > mode) {
+                mode = counter;
+            }
+        }
+
+        return mode;
     }
 }
